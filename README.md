@@ -7,6 +7,21 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+#### random infos
+fast alles ist auto generated, inclusive alle vorhandenen Pages und Components
+Generierter Code der fehlleitend ist (meiner Meinung nach):
+- Simple Dinge wie dropdowns muss man nicht per hand machen (siehe https://headlessui.com/)
+- Auf Requests results muss nicht reagiert werden, man kann im backend auch die Seite rerender lassen mit updated props
+- `Tailwind css` wird schon verwendet, aber größtenteils *zu viel*, siehe https://tailwindcss.com/, erleichtert arbeiten da man nicht einzelne css datein / abschnitte meintainen muss; schwöre das ist nice und lohnt sich mal anzugucken
+
+Generel gehe ich mal nicht davon aus das Laravel bekannt ist; Wenn es keine Einwende / bessere Vorschläge gibt aber sich niemand mit nem neuen framework beschäftigen will, kann ich das auch einfach so durchziehen (wenn ich genug zeit habe) - will niemanden php aufzwingen XD
+
+Das einzig wichtige um dann damit in vue arbeiten zu können wäre ne sammlung an api functionen, am besten mit typescript, um zu vermitteln 'was muss rein, was kommt wieder raus'; wobei meistens nur page props geupdated werden (wenn sich mehrere dinge ändern) => da bräuchte ich nur ein erm was alle funktionalitäten abdeckt (hab schon angefangen 'database/htw-multiplaner_erm.svg')
+
+ps: an die daten können wir auch mit nem webcrawler kommen, Modulux crawler siehe branch 'feat/crawler'
+wegen htw-login hab ich https://github.com/UMN-LATIS/laravel-shibboleth gefunden, habe es aber ohne dokumentation noch nicht zum laufen bekommen (theoretisch braucht man keine bestätitigung der htw, man sollte auch so SP registrieren können; dann kriegt man aber nur wenig infos zurück (sowas wie matikelnummer ist gesperrt) ), aber https://shibboleth.atlassian.net/wiki/spaces/CONCEPT/pages/948470554/SAMLKeysAndCertificates ist mir auch zu hoch
+
+
 # HTW-Multiplaner
 
 Git repo includes:
@@ -18,6 +33,8 @@ Git repo includes:
 - `vite` as development environment, for hot-refresh and building
 
 Thanks to `sail` (a light-weight command-line interface for interacting with Laravel's default Docker development environment, [see](https://laravel.com/docs/9.x/sail)) most dependencies are abstracted away, but whenever interacting with the database / cache / anything running, all commands must be prefixed by `.vendor/bin/sail ...`!
+
+
 
 
 ## Usage
