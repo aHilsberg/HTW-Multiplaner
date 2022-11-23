@@ -1,20 +1,30 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import {defineConfig} from 'vite';
+import laravel from 'vite-plugin-laravel'
 import vue from '@vitejs/plugin-vue';
+
+import tailwindcss from "tailwindcss";
+import autoprefixer from "autoprefixer";
+import AutoImport from 'unplugin-auto-import/vite'
+import inertiaLayout from "./resources/scripts/vite/inertia-layout";
 
 export default defineConfig({
     plugins: [
+        inertiaLayout(),
         laravel({
-            input: 'resources/js/app.js',
-            refresh: true,
+            postcss: [tailwindcss(), autoprefixer()],
         }),
-        vue({
-            template: {
-                transformAssetUrls: {
-                    base: null,
-                    includeAbsolute: false,
+        vue(),
+        AutoImport({
+            presetOverriding: true,
+            imports: [
+                'vue',
+                '@vueuse/core',
+                {
+                    '@inertiajs/inertia': ['Inertia'],
+                    '@inertiajs/inertia-vue3': ['useRemember', 'usePage', 'useForm'],
                 },
-            },
+            ],
         }),
     ],
+    publicDir: 'public'
 });

@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #app {
+    @apply h-full w-full
+}
+
+@layer utilities {
+    input[type="number"].appearance-nospinner::-webkit-inner-spin-button,
+    input[type="number"].appearance-nospinner::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
