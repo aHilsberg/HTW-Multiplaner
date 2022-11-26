@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html, body, #app {
-    @apply h-full w-full
+    @apply min-h-full min-w-full
 }
 
 @layer utilities {

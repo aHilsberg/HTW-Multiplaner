@@ -3,8 +3,6 @@
 </script>
 
 
-<template layout>
-    TABLE
-    THIS
-    <div>Test</div>
+<template layout="default">
+    <div>OwnTimetable page</div>
 </template>

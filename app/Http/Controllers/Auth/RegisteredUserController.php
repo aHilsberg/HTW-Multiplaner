@@ -21,7 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('auth/register');
     }
 
     /**
@@ -49,6 +49,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        session()->flash('message', '+Registered as ' . $user->name);
 
         return redirect(RouteServiceProvider::HOME);
     }

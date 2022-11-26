@@ -1,4 +1,4 @@
-import { App, SetupContext, ref, readonly, Ref } from 'vue'
+import {App, SetupContext, ref, readonly, Ref, InjectionKey} from 'vue'
 
 import AlertMessage from '@/views/components/flash/alert.vue'
 import ErrorMessage from '@/views/components/flash/error.vue'
@@ -24,26 +24,25 @@ export interface ActiveFlashMessage extends FlashMessage {
 const defaultMessages: { prefix: string; message: FlashMessage }[] = [
     {
         prefix: '+',
-        message: { component: SuccessMessage, attrs: {}, lifetime: 5000 },
+        message: {component: SuccessMessage, attrs: {}, lifetime: 5000},
     },
     {
         prefix: '!',
-        message: { component: AlertMessage, attrs: {}, lifetime: 10_000 },
+        message: {component: AlertMessage, attrs: {}, lifetime: 10_000},
     },
     {
         prefix: '-',
-        message: { component: ErrorMessage, attrs: {}, lifetime: 8000 },
+        message: {component: ErrorMessage, attrs: {}, lifetime: 8000},
     },
     {
         prefix: 'i',
-        message: { component: InfoMessage, attrs: {}, lifetime: -1 },
+        message: {component: InfoMessage, attrs: {}, lifetime: -1},
     },
 ]
 
 let cMessages = 0
 const messages = ref<ActiveFlashMessage[]>([])
 
-export const flashKey = Symbol()
 
 export interface FlashProvides {
     activeMessages: Readonly<Ref<ActiveFlashMessage[]>>
@@ -53,13 +52,15 @@ export interface FlashProvides {
     closeFlash: (id: number) => void
 }
 
+export const flashKey: InjectionKey<FlashProvides> = Symbol('flash:plugin')
+
 function activateMessage(message: FlashMessage) {
     const activeMessage = message as ActiveFlashMessage
     activeMessage.id = cMessages++
 
     if (activeMessage.lifetime > 0) {
+        // + to convert to primitive (number)
         activeMessage.lifeline = +setTimeout(() => {
-            // + to convert to primitive (number)
             removeMessage(activeMessage)
         }, activeMessage.lifetime)
     }
@@ -76,6 +77,8 @@ function removeMessage(message: ActiveFlashMessage) {
     messages.value.splice(i, 1)
 }
 
+
+// plugins interface
 export default {
     install: (app: App<Element>) => {
         //type header \n text
@@ -84,8 +87,8 @@ export default {
             if (
                 defaultMessages.every((defaultMessage) => {
                     if (text.startsWith(defaultMessage.prefix)) {
-                        const message = { ...defaultMessage.message }
-                        message.attrs = { ...message.attrs }
+                        const message = {...defaultMessage.message}
+                        message.attrs = {...message.attrs}
                         const iBody = text.indexOf('\n')
 
                         if (iBody != -1) {
@@ -105,7 +108,7 @@ export default {
                 //none default info
                 activateMessage({
                     component: InfoMessage,
-                    attrs: { header: text },
+                    attrs: {header: text},
                     lifetime: 5000,
                 })
             }

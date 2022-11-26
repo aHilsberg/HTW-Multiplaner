@@ -4,5 +4,5 @@
 
 
 <template>
-    ADD
+ADD_NAV_BUTTON
 </template>

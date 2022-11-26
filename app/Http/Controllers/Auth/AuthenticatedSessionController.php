@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Auth/Login', [
+        return Inertia::render('auth/login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
         ]);
@@ -37,6 +37,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        session()->flash('message', '+Logged in as '.$request->user()->name);
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -53,6 +55,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        session()->flash('message', "+Logged out\n see you next time");
 
         return redirect('/');
     }

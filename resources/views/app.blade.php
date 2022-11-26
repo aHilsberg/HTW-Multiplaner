@@ -12,6 +12,7 @@
 
 
         <!-- Scripts -->
+        @routes
         @vite
         @inertiaHead
     </head>
