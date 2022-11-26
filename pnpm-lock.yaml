@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@headlessui/vue': ^1.7.4
   '@heroicons/vue': ^2.0.13
   '@inertiajs/inertia': ^0.11.0
   '@inertiajs/inertia-vue3': ^0.6.0
@@ -22,6 +23,7 @@ specifiers:
   vue: ^3.2.41
 
 dependencies:
+  '@headlessui/vue': 1.7.4_vue@3.2.45
   '@heroicons/vue': 2.0.13_vue@3.2.45
   '@inertiajs/inertia': 0.11.1
   '@inertiajs/inertia-vue3': 0.6.0_5s4asfgpqryekmpvx2x3guy7nm
@@ -90,6 +92,15 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@headlessui/vue/1.7.4_vue@3.2.45:
+    resolution: {integrity: sha512-QHRlKCK/zRpjSjhth7c2CZvx5eMDFflXauqRdRJgp1CwScx6PwCpWiwDsjQcYM4z8Yik2ZvyX8W4PFT2Wsqqyw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.2.45
+    dev: false
 
   /@heroicons/vue/2.0.13_vue@3.2.45:
     resolution: {integrity: sha512-vVCVF02+rNKXEmanVNnmktJlxCbOn0qVFP1gfZPn4bcBIwPX3h9AVHGCkwly+IWDEME8w5oooG0KRd2hhSe/HQ==}
