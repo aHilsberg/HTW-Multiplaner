@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('friends', function (Blueprint $table) {
-            $table->foreignId('user_first_id')->primary()->constrained()->cascadeOnDelete()->references('id')->on('users');
-            $table->foreignId('user_second_id')->primary()->constrained()->cascadeOnDelete()->references('id')->on('users');
+            $table->foreignId('user_first_id')->constrained()->cascadeOnDelete()->references('id')->on('users');
+            $table->foreignId('user_second_id')->constrained()->cascadeOnDelete()->references('id')->on('users');
             $table->integer('friendship_state');
+            $table->primary('user_first_id');
         });
     }
 
