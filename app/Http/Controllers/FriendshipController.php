@@ -13,7 +13,7 @@ class FriendshipController extends Controller {
 
     public function store(Request $request) {
         $data = $request->validate([
-            'name' => ['required', 'exists:users'],
+            'name' => ['required', 'string', 'exists:users'],
         ]);
 
         $requestedFriend = User::where('name', $data['name'])->firstOrFail();
@@ -30,7 +30,7 @@ class FriendshipController extends Controller {
 
     public function update(Request $request) {
         $data = $request->validate([
-            'friend_id' => ['required', 'exists:users,id']
+            'friend_id' => ['required', 'numeric', 'exists:users,id']
         ]);
 
         $requester = User::findOrFail($data['friend_id']);
@@ -47,7 +47,7 @@ class FriendshipController extends Controller {
 
     public function destroy(Request $request) {
         $data = $request->validate([
-            'friend_id' => 'exists:users,id'
+            'friend_id' => ['required', 'numeric', 'exists:users,id']
         ]);
 
         $friend = User::findOrFail($data['friend_id']);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FriendshipController;
+use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -29,5 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/friends', [FriendshipController::class, 'store'])->name('friendship.request');
     Route::put('/friends', [FriendshipController::class, 'update'])->name('friendship.accept');
     Route::delete('/friends', [FriendshipController::class, 'destroy'])->name('friendship.remove');
+
+    Route::post('/group', [GroupController::class, 'store'])->name('group.create')->middleware('throttle:3,1');
+    Route::patch('/group', [GroupController::class, 'rename'])->name('group.rename');
+    Route::put('/group', [GroupController::class, 'update'])->name('group.update');
+    Route::delete('/group', [GroupController::class, 'destroy'])->name('group.remove');
 });
 

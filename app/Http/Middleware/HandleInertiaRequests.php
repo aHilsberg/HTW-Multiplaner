@@ -46,8 +46,8 @@ class HandleInertiaRequests extends Middleware {
             ],
             'data' => ($request->user() ? [
                 'relationships' => [
-                    'friends' => Friendship::allFriends($request->user())
-//                    'groups' => $request->user()->groups()->get(),
+                    'friends' => Friendship::allFriends($request->user()),
+                    'groups' => $request->user()->groups()->with('members:id,name')->get()
 //                    'events' => $request->user()->events()->get(),
                 ]
             ] : [])

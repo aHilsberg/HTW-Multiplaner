@@ -10,6 +10,8 @@ class Group extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     /**
      * the attributes that are mass assignable.
      *

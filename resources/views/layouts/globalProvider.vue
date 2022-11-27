@@ -4,7 +4,7 @@ import {inject, watchEffect} from 'vue'
 import {flashKey, FlashProvides} from '@/scripts/plugins/flash.plugin'
 import FlashContainer from '@/views/components/flash/container.vue'
 import useGlobal from '@/scripts/composables/useGlobal'
-import {ExtendedUser, FriendshipStatus, User} from '@/scripts/types/userRelationships'
+import {ExtendedUser, FriendshipStatus, Group, User} from '@/scripts/types/userRelationships'
 
 const page = usePage<{
     auth: {
@@ -16,6 +16,7 @@ const page = usePage<{
     data: {
         relationships: {
             friends: (User & { friendship: { friendship_state: FriendshipStatus } })[]
+            groups: Group[]
         }
     }
 }>()
@@ -44,6 +45,10 @@ watchEffect(() => {
         const state = friend.friendship.friendship_state
         return {...friend, friendshipState: state} as (User & { friendshipState: FriendshipStatus })
     })
+})
+
+watchEffect(() => {
+    useGlobal().groups = page.props.value.data.relationships.groups
 })
 </script>
 
