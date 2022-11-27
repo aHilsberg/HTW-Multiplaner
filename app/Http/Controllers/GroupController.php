@@ -53,27 +53,7 @@ class GroupController extends Controller {
             'additional_members.*' => ['required', 'numeric', 'exists:users,id']
         ]);
 
-        $validMembers = [];
-
-        $addToValidMembers = function ($person) use (&$validMembers) {
-            $id = $person->id;
-            $validMembers[$id] = true;
-        };
-
-        $relationships = User::where('id', $user->id)->with(['groups.members' => function ($query) {
-            $query->select('id');
-        }, 'friendsTo' => function ($query) {
-            $query->wherePivot('friendship_state', FriendStatus::Befriended)->select('id');
-        }, 'friendsFrom' => function ($query) {
-            $query->wherePivot('friendship_state', FriendStatus::Befriended)->select('id');
-        }])->firstOrFail();
-        foreach ($relationships->friendsTo as $friend)
-            $addToValidMembers($friend);
-        foreach ($relationships->friendsFrom as $friend)
-            $addToValidMembers($friend);
-        foreach ($relationships->groups as $group)
-            foreach ($group->members as $member)
-                $addToValidMembers($member);
+        $validMembers = User::getMovableUsers($user->id);
 
         foreach ($data['additional_members'] as $member) {
             abort_if(!array_key_exists($member, $validMembers), 400, 'not allowed to add user');
@@ -94,6 +74,9 @@ class GroupController extends Controller {
             ]
         ]);
 
-        $user->groups()->detach($data['group_id']);
+        $group = Group::where('id', $data['group_id'])->withCount('members')->firstOrFail();
+        $group->members()->detach($user->id);
+        if($group->members_count == 1)
+            $group->delete();
     }
 }

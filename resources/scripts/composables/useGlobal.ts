@@ -1,5 +1,5 @@
 import {reactive, ref} from 'vue'
-import {ExtendedUser, FriendshipStatus, Group, User} from '@/scripts/types/userRelationships'
+import {ExtendedUser, FriendshipStatus, Group, User, Event} from '@/scripts/types/userRelationships'
 
 const state = reactive<{
     user?: ExtendedUser,

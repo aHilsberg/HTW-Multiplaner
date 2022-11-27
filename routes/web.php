@@ -35,5 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/group', [GroupController::class, 'rename'])->name('group.rename');
     Route::put('/group', [GroupController::class, 'update'])->name('group.update');
     Route::delete('/group', [GroupController::class, 'destroy'])->name('group.remove');
+
+    Route::post('/event', [GroupController::class, 'store'])->name('event.create')->middleware('throttle:3,1');
+    Route::patch('/event', [GroupController::class, 'rename'])->name('event.rename');
+    Route::put('/event', [GroupController::class, 'update'])->name('event.update');
+    Route::delete('/event', [GroupController::class, 'destroy'])->name('event.remove');
 });
 

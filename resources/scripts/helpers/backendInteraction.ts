@@ -66,6 +66,7 @@ export const acceptFriendshipCall = wrappedCall<{ friend_id: number }>('friendsh
 
 export const removeFriendshipCall = wrappedCall<{ friend_id: number }>('friendship.remove', Method.DELETE)
 
+
 export const useCreateGroupForm = () => useValidatableForm('group.create', Method.POST, {
     name: '',
 })
@@ -78,7 +79,24 @@ export const updateGroupCall = wrappedCall<{
     additional_members: number[]
 }>('group.update', Method.PUT)
 
-export const removeGroup = wrappedCall<{
+export const removeGroupCall = wrappedCall<{
     group_id: number
 }>('group.remove', Method.DELETE)
+
+
+export const useCreateEventForm = () => useValidatableForm('event.create', Method.POST, {
+    name: '',
+})
+
+export const renameEventCall = wrappedCall<{ group_id: number, name: string }>('event.rename', Method.PATCH)
+
+export const updateEventCall = wrappedCall<{
+    group_id: number,
+    // user ids
+    additional_members: number[]
+}>('event.update', Method.PUT)
+
+export const removeEventCall = wrappedCall<{
+    group_id: number
+}>('event.remove', Method.DELETE)
 // #endregion

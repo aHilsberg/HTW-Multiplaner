@@ -3,11 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\FriendStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
 
 class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
@@ -65,5 +67,33 @@ class User extends Authenticatable {
 
     public function appointments(): BelongsToMany {
         return $this->belongsToMany(Appointment::class);
+    }
+
+    //-----------------------------------------------------------------------------------------------------
+
+    public static function getMovableUsers($id): array {
+        $validMembers = [];
+
+        $addToValidMembers = function ($person) use (&$validMembers) {
+            $id = $person->id;
+            $validMembers[$id] = true;
+        };
+
+        $relationships = User::where('id', $id)->with(['groups.members' => function ($query) {
+            $query->select('id');
+        }, 'friendsTo' => function ($query) {
+            $query->wherePivot('friendship_state', FriendStatus::Befriended)->select('id');
+        }, 'friendsFrom' => function ($query) {
+            $query->wherePivot('friendship_state', FriendStatus::Befriended)->select('id');
+        }])->firstOrFail();
+        foreach ($relationships->friendsTo as $friend)
+            $addToValidMembers($friend);
+        foreach ($relationships->friendsFrom as $friend)
+            $addToValidMembers($friend);
+        foreach ($relationships->groups as $group)
+            foreach ($group->members as $member)
+                $addToValidMembers($member);
+
+        return $validMembers;
     }
 }
