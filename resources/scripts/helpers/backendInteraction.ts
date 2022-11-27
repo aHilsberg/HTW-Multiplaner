@@ -100,3 +100,18 @@ export const removeEventCall = wrappedCall<{
     group_id: number
 }>('event.remove', Method.DELETE)
 // #endregion
+
+
+// #region appointments TODO
+
+// search
+
+// add page
+
+// add to timetable
+
+// vote
+
+// add appointment
+
+// #endregion

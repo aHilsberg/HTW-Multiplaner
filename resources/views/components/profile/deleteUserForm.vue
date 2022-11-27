@@ -9,7 +9,7 @@ import TextInput from '@/views/components/common/forms/textInput.vue'
 import InputError from '@/views/components/common/forms/inputError.vue'
 import CommonModal from '@/views/components/common/headless/CommonModal.vue'
 
-const isOpen = ref(true)
+const isOpen = ref(false)
 
 const {form, submit} = useDeleteProfileForm()
 

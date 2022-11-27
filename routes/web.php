@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\VotingController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,6 +28,8 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('ownTimetable', [
         ]);
     })->name('home');
+
+    Route::get('/appointments', [AppointmentController::class, 'index'])->name('lookup');
 });
 
 
@@ -36,9 +43,21 @@ Route::middleware('auth')->group(function () {
     Route::put('/group', [GroupController::class, 'update'])->name('group.update');
     Route::delete('/group', [GroupController::class, 'destroy'])->name('group.remove');
 
-    Route::post('/event', [GroupController::class, 'store'])->name('event.create')->middleware('throttle:3,1');
-    Route::patch('/event', [GroupController::class, 'rename'])->name('event.rename');
-    Route::put('/event', [GroupController::class, 'update'])->name('event.update');
-    Route::delete('/event', [GroupController::class, 'destroy'])->name('event.remove');
+    Route::post('/event', [EventController::class, 'store'])->name('event.create')->middleware('throttle:3,1');
+    Route::patch('/event', [EventController::class, 'rename'])->name('event.rename');
+    Route::put('/event', [EventController::class, 'update'])->name('event.update');
+    Route::delete('/event', [EventController::class, 'destroy'])->name('event.remove');
+
+    Route::get('/module', [ModuleController::class, 'search'])->name('module.search');
+    Route::get('/exam', [ExamController::class, 'search'])->name('exam.search');
+
+    Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.create');
+    Route::patch('/appointment', [AppointmentController::class, 'rename'])->name('appointment.rename');
+    Route::put('/appointment', [AppointmentController::class, 'update'])->name('appointment.update');
+    Route::delete('/appointment', [AppointmentController::class, 'destroy'])->name('appointment.remove');
+
+
+    Route::post('/vote', [VotingController::class, 'update'])->name('event.vote');
+    // possible get for free space
 });
 

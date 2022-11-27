@@ -4,40 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function index(Request $request){
+        // get all appointments of appointable
+
+        return Inertia::render('searchTimetable', [
+
+        ]);
+    }
+
+
     public function store(Request $request)
     {
-        //
+        // create new appointment (event / private event)
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
+    public function rename(){
+        // update name; room (event / private event)
+    }
+
+
     public function update(Request $request, Appointment $appointment)
     {
-        //
+        // join appointment
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Appointment $appointment)
     {
-        //
+        // leave appointment
     }
 }

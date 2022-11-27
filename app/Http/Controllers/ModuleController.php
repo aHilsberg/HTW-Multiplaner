@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Exam;
+use App\Models\Module;
 use Illuminate\Http\Request;
 
-class ExamController extends Controller
+class ModuleController extends Controller
 {
     public function search(Request $request){
         // get search results; json
@@ -15,6 +15,6 @@ class ExamController extends Controller
         ]);
 
 
-        return response()->json(Exam::all());
+        return response()->json(Module::all());
     }
 }

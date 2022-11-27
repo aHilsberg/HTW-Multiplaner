@@ -2,14 +2,32 @@
 import UpdateProfileInformationForm from '@/views/components/profile/updateProfileInformationForm.vue'
 import UpdatePasswordForm from '@/views/components/profile/updatePasswordForm.vue'
 import DeleteUserForm from '@/views/components/profile/deleteUserForm.vue'
+import {usePage} from '@inertiajs/inertia-vue3'
+import useGlobal from '@/scripts/composables/useGlobal'
+import {ExtendedUser} from '@/scripts/types/userRelationships'
+import {watchEffect} from 'vue'
 
 defineProps<{
     mustVerifyEmail: boolean,
     status?: string,
 }>()
+
+
+const page = usePage<{
+    auth: {
+        user: ExtendedUser
+    }
+}>()
+
+watchEffect(() => {
+    const user = page.props.value.auth.user
+
+    console.log({user})
+    useGlobal().user = user
+})
 </script>
 
-<template layout="auth">
+<template>
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
         Profile
     </h2>

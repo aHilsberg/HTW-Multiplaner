@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Appointment;
 use App\Models\Friendship;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -49,6 +50,9 @@ class HandleInertiaRequests extends Middleware {
                     'friends' => Friendship::allFriends($request->user()),
                     'groups' => $request->user()->groups()->with('members:id,name')->get(),
                     'events' => $request->user()->events()->with('members:id,name')->get(),
+                ],
+                'timetable' => [
+                    'appointments' => $request->user()->appointments()
                 ]
             ] : [])
         ]);
