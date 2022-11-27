@@ -1,8 +1,3 @@
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-
-<template>
-    TABS
-</template>
+<template>TABS</template>

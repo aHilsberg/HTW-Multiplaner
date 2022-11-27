@@ -11,7 +11,6 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:prettier/recommended',
     '@vue/eslint-config-typescript/recommended',
-    'plugin:cypress/recommended',
   ],
   parser: 'vue-eslint-parser',
   parserOptions: {

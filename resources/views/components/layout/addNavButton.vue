@@ -1,8 +1,3 @@
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-
-<template>
-ADD_NAV_BUTTON
-</template>
+<template>ADD_NAV_BUTTON</template>
