@@ -41,7 +41,9 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit');
+        session()->flash('message', '+Updated profile');
+
+        return Redirect::route('profile');
     }
 
     /**

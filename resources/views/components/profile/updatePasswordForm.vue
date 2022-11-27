@@ -1,32 +1,28 @@
-<script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { useForm } from '@inertiajs/inertia-vue3';
-import { ref } from 'vue';
+<script setup lang="ts">
+import {ref} from 'vue'
+import {useUpdatePasswordForm} from '@/scripts/helpers/forms'
+import InputLabel from '@/views/components/common/forms/inputLabel.vue'
+import TextInput from '@/views/components/common/forms/textInput.vue'
+import InputError from '@/views/components/common/forms/inputError.vue'
+import PrimaryButton from '@/views/components/common/forms/primaryButton.vue'
 
-const passwordInput = ref(null);
-const currentPasswordInput = ref(null);
+const passwordInput = ref<HTMLInputElement | null>(null);
+const currentPasswordInput = ref<HTMLInputElement | null>(null);
 
-const form = useForm({
-    current_password: '',
-    password: '',
-    password_confirmation: '',
-});
+const {form, validate, submit} = useUpdatePasswordForm()
 
 const updatePassword = () => {
-    form.put(route('password.update'), {
+    submit({
         preserveScroll: true,
         onSuccess: () => form.reset(),
         onError: () => {
             if (form.errors.password) {
                 form.reset('password', 'password_confirmation');
-                passwordInput.value.focus();
+                passwordInput.value?.focus();
             }
             if (form.errors.current_password) {
                 form.reset('current_password');
-                currentPasswordInput.value.focus();
+                currentPasswordInput.value?.focus();
             }
         },
     });
@@ -40,9 +36,9 @@ const updatePassword = () => {
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Ensure your account is using a long, random password to stay secure.</p>
         </header>
 
-        <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
+        <form @submit.prevent="updatePassword" @focusout="() => !form.processing && validate()" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="current_password" value="Current Password" />
+                <InputLabel for="current_password" label="Current Password" />
                 <TextInput
                     id="current_password"
                     ref="currentPasswordInput"
@@ -55,7 +51,7 @@ const updatePassword = () => {
             </div>
 
             <div>
-                <InputLabel for="password" value="New Password" />
+                <InputLabel for="password" label="New Password" />
                 <TextInput
                     id="password"
                     ref="passwordInput"
@@ -68,7 +64,7 @@ const updatePassword = () => {
             </div>
 
             <div>
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <InputLabel for="password_confirmation" label="Confirm Password" />
                 <TextInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"

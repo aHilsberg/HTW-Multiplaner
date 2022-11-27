@@ -19,7 +19,7 @@ class Group extends Model
         'name'
     ];
 
-    public function users() : BelongsToMany {
+    public function members() : BelongsToMany {
         return $this->belongsToMany(User::class);
     }
 }

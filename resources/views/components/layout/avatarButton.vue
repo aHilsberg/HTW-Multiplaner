@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import useUser, {isLoggedIn} from '@/scripts/composables/useUser'
-import  { Link} from '@inertiajs/inertia-vue3'
+import {Link} from '@inertiajs/inertia-vue3'
+import useGlobal from '@/scripts/composables/useGlobal'
 
-const user = useUser()
+const user = useGlobal().user
 </script>
 
 
 <template>
-    <div v-if="isLoggedIn()">
+    <template v-if="!!user">
         {{ user.name }}
         <Link :href="route('logout')" method="post" as="button" class="underline text-sm text-gray-600">Log Out</Link>
-    </div>
-    <Link  v-else :href="route('register')">NO</Link>
+        <Link :href="route('profile')" method="get" as="button" class="ml-2 underline text-sm text-gray-600">Profile</Link>
+    </template>
+    <template v-else>
+        <Link :href="route('login')">Login</Link>
+    </template>
 </template>

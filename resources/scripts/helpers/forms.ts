@@ -2,6 +2,7 @@ import {useForm} from '@inertiajs/inertia-vue3'
 import {usePrevalidate} from '@/scripts/helpers/formValidation'
 import * as Inertia from '@inertiajs/inertia'
 import {Method} from '@inertiajs/inertia'
+import useGlobal from '@/scripts/composables/useGlobal'
 
 const useValidatableForm = (routeName: string, method: Method, initialData: { [key: string]: any }) => {
     // @ts-ignore
@@ -39,8 +40,16 @@ export const useLoginForm = () => useValidatableForm('login', Method.POST, {
     remember: false,
 })
 
+export const useVerifyEmailForm = () => useValidatableForm('verification.send', Method.POST, {})
+
 export const useForgotPasswordForm = () => useValidatableForm('password.email', Method.POST, {
     email: '',
+})
+
+export const useUpdatePasswordForm = () => useValidatableForm('password.update', Method.PUT, {
+    current_password: '',
+    password: '',
+    password_confirmation: '',
 })
 
 export const useResetPasswordForm = (token: string, email: string) => useValidatableForm('password.store', Method.POST, {
@@ -50,9 +59,19 @@ export const useResetPasswordForm = (token: string, email: string) => useValidat
     password_confirmation: '',
 })
 
-export const useVerifyEmailForm = () => useValidatableForm('verification.send', Method.POST, {})
-
-
 export const useConfirmPasswordForm = () => useValidatableForm('password.confirm', Method.POST, {
+    password: '',
+})
+
+
+export const useUpdateProfileForm = () => {
+    const user = useGlobal().user
+    return useValidatableForm('profile.update', Method.PATCH, {
+        name: user!.name,
+        email: user!.email,
+    })
+}
+
+export const useDeleteProfileForm = () => useValidatableForm('profile.destroy', Method.DELETE, {
     password: '',
 })

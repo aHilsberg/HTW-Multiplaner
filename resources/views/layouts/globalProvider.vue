@@ -2,8 +2,8 @@
 import {usePage} from '@inertiajs/inertia-vue3'
 import {inject, watchEffect} from 'vue'
 import {flashKey, FlashProvides} from '@/scripts/plugins/flash.plugin'
-import useUser from '@/scripts/composables/useUser'
 import FlashContainer from '@/views/components/flash/container.vue'
+import useGlobal from '@/scripts/composables/useGlobal'
 
 const page = usePage<{
     auth: {
@@ -23,7 +23,7 @@ watchEffect(() => {
     const user = page.props.value.auth.user
 
     console.log({user})
-    useUser().value = user;
+    useGlobal().user = user;
 })
 
 watchEffect(
@@ -41,6 +41,5 @@ watchEffect(
 
 <template>
     <FlashContainer />
-    {{ page.props.value.flash }}
     <slot/>
 </template>
