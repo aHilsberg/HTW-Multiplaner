@@ -1,7 +1,9 @@
 export type User = {
     id: number,
     name: string,
-    email : string
+}
+export type ExtendedUser = User & {
+    email: string
 }
 
 export enum FriendshipStatus {

@@ -37,8 +37,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Request::macro('validate', function (array $rules, ...$params) {
-            validator()->validate($this->all(), $rules, ...$params);
+            $data = validator()->validate($this->all(), $rules, ...$params);
             $this->throwIfPrevalidate();
+
+            return $data;
         });
     }
 }

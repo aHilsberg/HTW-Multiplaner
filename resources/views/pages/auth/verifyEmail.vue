@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed} from 'vue'
-import {useVerifyEmailForm} from '@/scripts/helpers/forms'
+import {useVerifyEmailForm} from '@/scripts/helpers/backendInteraction'
 import PrimaryButton from '@/views/components/common/forms/primaryButton.vue'
 
 const props = defineProps<{

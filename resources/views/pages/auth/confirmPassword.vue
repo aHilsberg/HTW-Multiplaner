@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useConfirmPasswordForm} from '@/scripts/helpers/forms'
+import {useConfirmPasswordForm} from '@/scripts/helpers/backendInteraction'
 import InputLabel from '@/views/components/common/forms/inputLabel.vue'
 import TextInput from '@/views/components/common/forms/textInput.vue'
 import InputError from '@/views/components/common/forms/inputError.vue'

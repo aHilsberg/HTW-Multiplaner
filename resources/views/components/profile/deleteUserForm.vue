@@ -2,7 +2,7 @@
 import {Dialog, DialogPanel, DialogTitle, DialogDescription} from '@headlessui/vue'
 import DangerButton from '@/views/components/common/forms/dangerButton.vue'
 import {nextTick, ref} from 'vue'
-import {useDeleteProfileForm} from '@/scripts/helpers/forms'
+import {useDeleteProfileForm} from '@/scripts/helpers/backendInteraction'
 import SecondaryButton from '@/views/components/common/forms/secondaryButton.vue'
 import InputLabel from '@/views/components/common/forms/inputLabel.vue'
 import TextInput from '@/views/components/common/forms/textInput.vue'

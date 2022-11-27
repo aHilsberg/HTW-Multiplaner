@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FriendshipController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,11 +15,19 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('ownTimetable', [
-    ]);
-})->name('home');
+require __DIR__ . '/auth.php';
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('ownTimetable', [
+        ]);
+    })->name('home');
+});
 
 
-require __DIR__.'/auth.php';
+Route::middleware('auth')->group(function () {
+    Route::post('/friends', [FriendshipController::class, 'store'])->name('friendship.request');
+    Route::put('/friends', [FriendshipController::class, 'update'])->name('friendship.accept');
+    Route::delete('/friends', [FriendshipController::class, 'destroy'])->name('friendship.remove');
+});
 

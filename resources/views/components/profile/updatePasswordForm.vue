@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from 'vue'
-import {useUpdatePasswordForm} from '@/scripts/helpers/forms'
+import {useUpdatePasswordForm} from '@/scripts/helpers/backendInteraction'
 import InputLabel from '@/views/components/common/forms/inputLabel.vue'
 import TextInput from '@/views/components/common/forms/textInput.vue'
 import InputError from '@/views/components/common/forms/inputError.vue'

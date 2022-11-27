@@ -1,6 +1,29 @@
 import {watch} from 'vue'
-import {Inertia, Method} from '@inertiajs/inertia'
-import {InertiaFormProps} from '@inertiajs/inertia-vue3'
+import * as InertiaTypes from '@inertiajs/inertia'
+import {InertiaFormProps, useForm} from '@inertiajs/inertia-vue3'
+import {Method} from '@inertiajs/inertia'
+import {Inertia} from '@inertiajs/inertia'
+
+
+export const useWrappedForm = (routeName: string, method: Method, initialData: { [key: string]: any }) => {
+    // @ts-ignore
+    const url = route(routeName)
+    const form = useForm(initialData)
+
+    const submit = (options?: Partial<InertiaTypes.VisitOptions>) => form.submit(method, url, {
+        ...options,
+        onError: (errors) => {
+            console.log({errors})
+            form.clearErrors().setError(errors)
+
+            if (options?.onError)
+                options.onError(errors)
+        },
+    })
+
+    return {form, url, submit}
+}
+
 
 export function usePrevalidate(form: InertiaFormProps<{ [key: string]: any }>, {
     method,
@@ -18,7 +41,7 @@ export function usePrevalidate(form: InertiaFormProps<{ [key: string]: any }>, {
     })
 
     function validate() {
-        if(!needsValidation)
+        if (!needsValidation)
             return
 
         Inertia.visit(url, {
@@ -45,3 +68,12 @@ export function usePrevalidate(form: InertiaFormProps<{ [key: string]: any }>, {
 
     return {validate}
 }
+
+
+export const useValidatableForm = (routeName: string, method: Method, initialData: { [key: string]: any }) => {
+    const {form, submit, url} = useWrappedForm(routeName, method, initialData)
+    const {validate} = usePrevalidate(form, {method, url})
+
+    return {form, validate, submit}
+}
+

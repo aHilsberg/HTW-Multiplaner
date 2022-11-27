@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useRegisterForm} from '@/scripts/helpers/forms'
+import {useRegisterForm} from '@/scripts/helpers/backendInteraction'
 import InputError from '@/views/components/common/forms/inputError.vue'
 import TextInput from '@/views/components/common/forms/textInput.vue'
 import InputLabel from '@/views/components/common/forms/inputLabel.vue'

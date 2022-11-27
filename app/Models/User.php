@@ -9,8 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -44,18 +43,27 @@ class User extends Authenticatable
     ];
 
 
-
-    public function groups() : BelongsToMany {
+    public function groups(): BelongsToMany {
         return $this->belongsToMany(Group::class);
     }
 
-    public function friends() : BelongsToMany {
-        return $this->belongsToMany(User::class, 'friends', 'user_first_id', 'user_second_id')->withPivot('friendship_state')->merge(
-            $this->belongsToMany(User::class, 'friends', 'user_second_id', 'user_first_id')->withPivot('friendship_state')
-        );
+    public function events(): BelongsToMany {
+        return $this->belongsToMany(Event::class);
     }
 
-    public function appointments() : BelongsToMany {
+    public function friendsTo(): BelongsToMany {
+        return $this->belongsToMany(User::class, Friendship::class, 'user_first_id', 'user_second_id')->as('friendship')
+            ->select(['id', 'name'])
+            ->withPivot('friendship_state');
+    }
+
+    public function friendsFrom(): BelongsToMany {
+        return $this->belongsToMany(User::class, Friendship::class, 'user_second_id', 'user_first_id')->as('friendship')
+            ->select(['id', 'name'])
+            ->withPivot('friendship_state');
+    }
+
+    public function appointments(): BelongsToMany {
         return $this->belongsToMany(Appointment::class);
     }
 }

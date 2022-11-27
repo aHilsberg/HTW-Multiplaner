@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {useForgotPasswordForm} from '@/scripts/helpers/forms'
+import {useForgotPasswordForm} from '@/scripts/helpers/backendInteraction'
 import InputLabel from '@/views/components/common/forms/inputLabel.vue'
 import TextInput from '@/views/components/common/forms/textInput.vue'
 import InputError from '@/views/components/common/forms/inputError.vue'

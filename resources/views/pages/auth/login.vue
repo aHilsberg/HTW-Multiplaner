@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Link} from '@inertiajs/inertia-vue3'
-import {useLoginForm} from '@/scripts/helpers/forms'
+import {useLoginForm} from '@/scripts/helpers/backendInteraction'
 import Checkbox from '@/views/components/common/forms/checkbox.vue'
 import InputLabel from '@/views/components/common/forms/inputLabel.vue'
 import TextInput from '@/views/components/common/forms/textInput.vue'
@@ -8,7 +8,6 @@ import InputError from '@/views/components/common/forms/inputError.vue'
 import PrimaryButton from '@/views/components/common/forms/primaryButton.vue'
 
 defineProps<{
-    canResetPassword: boolean,
     status: string,
 }>()
 
@@ -17,7 +16,7 @@ const {form, submit, validate} = useLoginForm()
 </script>
 
 <template layout="auth">
-    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+    <div v-if="!!status" class="mb-4 font-medium text-sm text-green-600">
         {{ status }}
     </div>
 
@@ -45,8 +44,13 @@ const {form, submit, validate} = useLoginForm()
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <Link v-if="canResetPassword" :href="route('password.request')"
+        <div class="flex items-center justify-end mt-4 gap-3">
+            <Link :href="route('register')"
+                  class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md">
+                No Account yet?
+            </Link>
+
+            <Link :href="route('password.request')"
                   class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md">
                 Forgot your password?
             </Link>

@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Friendship;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
-class HandleInertiaRequests extends Middleware
-{
+class HandleInertiaRequests extends Middleware {
     /**
      * The root template that is loaded on the first page visit.
      *
@@ -18,22 +18,20 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return string|null
      */
-    public function version(Request $request)
-    {
+    public function version(Request $request) {
         return parent::version($request);
     }
 
     /**
      * Define the props that are shared by default.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return mixed[]
      */
-    public function share(Request $request)
-    {
+    public function share(Request $request) {
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user() ? $request->user()->only('id', 'email', 'name') : null,
@@ -45,7 +43,14 @@ class HandleInertiaRequests extends Middleware
             },
             'flash' => [
                 'message' => $request->session()->get('message')
-            ]
+            ],
+            'data' => ($request->user() ? [
+                'relationships' => [
+                    'friends' => Friendship::allFriends($request->user())
+//                    'groups' => $request->user()->groups()->get(),
+//                    'events' => $request->user()->events()->get(),
+                ]
+            ] : [])
         ]);
     }
 }
