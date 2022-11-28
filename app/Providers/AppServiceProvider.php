@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Exceptions\PrevalidationPassedException;
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
@@ -42,5 +43,12 @@ class AppServiceProvider extends ServiceProvider
 
             return $data;
         });
+
+        Relation::enforceMorphMap([
+            'event' => 'App\Models\Event',
+            'privateEvent' => 'App\Models\PrivateEvent',
+            'exam' => 'App\Models\Exam',
+            'module' => 'App\Models\Module',
+        ]);
     }
 }

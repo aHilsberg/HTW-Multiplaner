@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\RecurrenceState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Appointment extends Model
 {
@@ -49,7 +50,15 @@ class Appointment extends Model
 
 
 
-    public function appointable(){
+    public function appointable(): MorphTo {
         return $this->morphTo();
+    }
+
+    public function voters(){
+        return $this->belongsToMany(User::class, EventVotes::class)->as('voters');
+    }
+
+    public function watchers() {
+        return $this->belongsToMany(User::class);
     }
 }

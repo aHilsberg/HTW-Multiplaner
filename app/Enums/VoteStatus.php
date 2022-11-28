@@ -2,6 +2,6 @@
 namespace App\Enums;
 
 enum VoteStatus : int {
-    case Approve = 0;
-    case Oppose = 1;
+    case Oppose = 0;
+    case Approve = 1;
 }

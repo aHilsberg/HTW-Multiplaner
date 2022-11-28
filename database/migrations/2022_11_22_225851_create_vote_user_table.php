@@ -14,9 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vote_users', function (Blueprint $table) {
-            $table->foreignId('user_id');
-            $table->foreignId('appointment_id');
+        Schema::create('vote_user', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('appointment_id')->constrained()->cascadeOnDelete();
             $table->integer('vote_state')->default(VoteStatus::Approve->value);
             $table->primary(['user_id', 'appointment_id']);
         });

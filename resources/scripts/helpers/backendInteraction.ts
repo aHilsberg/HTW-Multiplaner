@@ -106,12 +106,13 @@ export const removeEventCall = wrappedCall<{
 
 // search
 
-// add page
+// add module page
 
-// add to timetable
+export const addAppointmentToTimetableCall = wrappedCall<{ appointment_id: number }>('appointment.update', Method.PUT)
+export const removeAppointmentFromTimetableCall = wrappedCall<{ appointment_id: number }>('appointment.remove', Method.DELETE)
 
 // vote
 
-// add appointment
+// create appointment
 
 // #endregion
