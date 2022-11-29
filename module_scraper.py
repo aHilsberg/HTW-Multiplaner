@@ -4,6 +4,9 @@ import json
 import time
 import re
 
+turnus_times = ['w\u00f6chentlich', 'Ungerade Woche', 'Gerade Woche']
+module_types = ['Vorlesung', '\u00dcbung', 'Praktikum']
+
 # all htw dresden study groups
 study_groups = [
   '19/011/KI', '19/011/VT', '19/033/61', '19/033/62', '19/037/61', '19/037/62', '19/041/01', '19/042/01', '19/043/01', '19/051/01',
@@ -81,12 +84,44 @@ for study_group in study_groups:
             if duration:
               timestamp = ' '.join(duration.group(1).split())
               key = timestamp + ' ' + days[int(col_index)]
-              if key in data:
-                if element not in data[key]:
-                  data[key].append(element)
+
+              if key not in data:
+                data[key] = []
+
+              module_id = element.split()[0]
+              online = 'OnlineOPAL' in element
+              opal = 'OPAL' in element
+
+              turnus = ' '.join([t for t in turnus_times if t in element])
+
+              mtype = element.split()[2][0]
+              module_type = ' '.join([m for m in module_types if m[0] == mtype])
+
+              if '_' not in module_id:
+                dataset = {
+                  'module_id': str('Spezialmodul: ' + module_id),
+                  'opal': opal,
+                  'online': online,
+                  'room': re.findall('[A-Z]\s[0-9][0-9]*[a-z]?', element),
+                  'turnus': turnus,
+                  'study_groups': element.split('Uhr ')[1]
+                }
               else:
-                data[key] = [element]
+                dataset = {
+                  'module_id': module_id,
+                  'module_short': element.split()[1],
+                  'module_type': module_type,
+                  'opal': opal,
+                  'online': online,
+                  'room': re.findall('[A-Z]\s[0-9][0-9]*[a-z]?', element),
+                  'lecturer': element.split(turnus)[0].split()[-1],
+                  'turnus': turnus,
+                  'study_groups': element.split('Uhr ')[1]
+                }
+
+              if dataset not in data[key]:
+                data[key].append(dataset)
 
 # write data to a json file with current time stamp
-with open(str('modules_' + time.strftime("%Y%m%d-%H%M%S") + '.json'), 'w') as outfile:
+with open(str('modules_' + time.strftime("%Y%m%d-%H%M%s") + '.json'), 'w') as outfile:
   json.dump(data, outfile)
