@@ -58,5 +58,5 @@ Beispiel:
 ]
 ```
 
-### 2. Exam Scrapter ###
+### 2. Exam Scraper ###
 * Ist momentan noch in Arbeit, da die Request Response nicht alle Daten liefert
