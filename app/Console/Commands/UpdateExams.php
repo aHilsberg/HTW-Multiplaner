@@ -11,14 +11,14 @@ class UpdateExams extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'load:exams';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'update exam entries from crawled data';
 
     /**
      * Execute the console command.
@@ -27,6 +27,9 @@ class UpdateExams extends Command
      */
     public function handle()
     {
+
+
+
         return Command::SUCCESS;
     }
 }

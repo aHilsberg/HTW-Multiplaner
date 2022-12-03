@@ -11,14 +11,14 @@ class UpdateTimetable extends Command {
      *
      * @var string
      */
-    protected $signature = 'crawl:timetable';
+    protected $signature = 'load:timetable';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'update crawled timetable';
+    protected $description = 'update timetable entries from crawled data';
 
     /**
      * Execute the console command.
@@ -26,8 +26,6 @@ class UpdateTimetable extends Command {
      * @return int
      */
     public function handle() {
-//        ShellCommand::execute(base_path() . "/crawler/crawl.sh");
-
         // read an update
         $files = Storage::disk('webcrawler')->allFiles();
 
