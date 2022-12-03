@@ -5,7 +5,7 @@ import {Method} from '@inertiajs/inertia'
 import {Inertia} from '@inertiajs/inertia'
 
 
-export const useWrappedForm = (routeName: string, method: Method, initialData: { [key: string]: any }) => {
+export const useWrappedForm = <T extends { [key: string]: any }>(routeName: string, method: Method, initialData: T) => {
     // @ts-ignore
     const url = route(routeName)
     const form = useForm(initialData)
@@ -13,8 +13,7 @@ export const useWrappedForm = (routeName: string, method: Method, initialData: {
     const submit = (options?: Partial<InertiaTypes.VisitOptions>) => form.submit(method, url, {
         ...options,
         onError: (errors) => {
-            console.log({errors})
-            form.clearErrors().setError(errors)
+            form.clearErrors().setError(errors as any)
 
             if (options?.onError)
                 options.onError(errors)
@@ -70,7 +69,7 @@ export function usePrevalidate(form: InertiaFormProps<{ [key: string]: any }>, {
 }
 
 
-export const useValidatableForm = (routeName: string, method: Method, initialData: { [key: string]: any }) => {
+export const useValidatableForm = <T extends { [key: string]: any }>(routeName: string, method: Method, initialData: T) => {
     const {form, submit, url} = useWrappedForm(routeName, method, initialData)
     const {validate} = usePrevalidate(form, {method, url})
 

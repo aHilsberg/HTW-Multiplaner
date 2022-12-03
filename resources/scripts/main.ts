@@ -2,7 +2,6 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import {importPageComponent} from '@/scripts/vite/import-page-component'
-
 // @ts-ignore
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import weekday from 'dayjs/plugin/weekday'
