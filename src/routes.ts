@@ -1,19 +1,19 @@
 import { Dataset, createPlaywrightRouter } from "crawlee";
 
-var testMaxLimit = 5;
+// var testMaxLimit = 5;
 
 export const router = createPlaywrightRouter();
 router.addDefaultHandler(async ({ enqueueLinks, page, log }) => {
-  log.info(`enqueueing new URLs` + testMaxLimit);
+  log.info(`enqueueing new URLs`);
 
-  if (testMaxLimit == 0) return;
+  // if (testMaxLimit == 0) return;
 
   await page.waitForSelector("#tx-ezqueries-content");
 
   await enqueueLinks({
     selector: "a.page-link",
     label: "list",
-    limit: testMaxLimit,
+    // limit: testMaxLimit,
   });
 
   await enqueueLinks({
@@ -22,10 +22,10 @@ router.addDefaultHandler(async ({ enqueueLinks, page, log }) => {
       /https:\/\/apps\.htw-dresden\.de\/app-modulux\/frontend\/ausgabe\/module\/.*/g,
     ],
     label: "module",
-    limit: testMaxLimit,
+    // limit: testMaxLimit,
   });
 
-  testMaxLimit = Math.max(0, testMaxLimit - 1);
+  // testMaxLimit = Math.max(0, testMaxLimit - 1);
 });
 
 router.addHandler("module", async ({ request, page, log }) => {

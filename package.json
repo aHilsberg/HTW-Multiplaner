@@ -1,7 +1,6 @@
 {
     "name": "modulux",
     "version": "0.0.1",
-    "type": "module",
     "description": "This is a webcrawler for gaining information regarding htw modulux and timetable",
     "dependencies": {
         "crawlee": "^3.0.0",
@@ -13,7 +12,7 @@
         "typescript": "^4.7.4"
     },
     "scripts": {
-        "start:modulux": "node dist/modulux.js",
+        "start:modulux": "node src/modulux.js",
         "dev:modulux": "ts-node-esm -T src/modulux.ts",
         "build": "tsc"
     },
