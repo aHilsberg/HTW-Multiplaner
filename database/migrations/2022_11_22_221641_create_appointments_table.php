@@ -16,14 +16,17 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('owner_id')->constrained()->cascadeOnDelete()->references('id')->on('users');
+            $table->foreignId('owner_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->date('origin_date');
             $table->time('start_time');
             $table->time('end_time');
             $table->integer('recurrence')->default(RecurrenceState::None->value);
-            $table->string('location');
-            $table->bigInteger('appointable_id');
-            $table->string('appointable_type');
+            $table->string('location')->nullable();
+            $table->string('details')->nullable();
+            $table->integer('info')->nullable();
+            $table->bigInteger('appointable_id')->nullable();
+            $table->string('appointable_type')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder {
 //
 //        User::factory(5);
 //
-//        Artisan::call('load:modulux');
-        Artisan::call('load:exams');
+        Artisan::call('load:modulux');
+        Artisan::call('load:timetable');
     }
 }

@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Appointment extends Model
-{
+class Appointment extends Model {
     use HasFactory;
 
 
@@ -24,6 +23,8 @@ class Appointment extends Model
         'end_time',
         'recurrence',
         'location',
+        'details',
+        'info',
         'appointable_id',
         'appointable_type'
     ];
@@ -45,20 +46,24 @@ class Appointment extends Model
         'origin_date' => 'datetime',
         'start_time' => 'datetime',
         'end_time' => 'datetime',
+        'location' => 'array',
         'recurrence' => RecurrenceState::class
     ];
-
 
 
     public function appointable(): MorphTo {
         return $this->morphTo();
     }
 
-    public function voters(){
+    public function voters() {
         return $this->belongsToMany(User::class, EventVotes::class)->as('voters');
     }
 
     public function watchers() {
         return $this->belongsToMany(User::class);
+    }
+
+    public function studyGroups() {
+        return $this->belongsToMany(StudyGroup::class, AppointmentStudyGroup::class);
     }
 }
