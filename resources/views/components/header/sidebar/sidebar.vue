@@ -1,18 +1,15 @@
 <script setup lang="ts">
+import { useVModel } from "@vueuse/core";
 
-import CommonSidebarModal from '@/views/components/common/headless/commonSidebarModal.vue'
-import {useVModel} from '@vueuse/core'
-import Friends from '@/views/components/header/sidebar/friends.vue'
-
+import CommonSidebarModal from "@/views/components/common/headless/commonSidebarModal.vue";
+import Friends from "@/views/components/header/sidebar/friends.vue";
 
 const props = defineProps<{
-    open: boolean
-}>()
+    open: boolean;
+}>();
 
-
-const isOpen = useVModel(props, 'open')
+const isOpen = useVModel(props, "open");
 </script>
-
 
 <template>
     <CommonSidebarModal v-model:open="isOpen">

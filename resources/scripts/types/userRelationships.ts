@@ -1,25 +1,25 @@
 export type User = {
-    id: number,
-    name: string,
-}
+    id: number;
+    name: string;
+};
 export type ExtendedUser = User & {
-    email: string
-}
+    email: string;
+};
 
 export enum FriendshipStatus {
     AwaitingResponse,
     Invited,
-    Befriended
+    Befriended,
 }
 
 export type Group = {
-    id: number
-    name: string
-    members: User[]
-}
+    id: number;
+    name: string;
+    members: User[];
+};
 
 export type Event = {
-    id: number
-    name: string
-    members: User[]
-}
+    id: number;
+    name: string;
+    members: User[];
+};

@@ -1,15 +1,21 @@
-import {reactive, ref} from 'vue'
-import {ExtendedUser, FriendshipStatus, Group, User, Event} from '@/scripts/types/userRelationships'
+import { reactive, ref } from "vue";
+
+import {
+    ExtendedUser,
+    FriendshipStatus,
+    Group,
+    User,
+    Event,
+} from "@/scripts/types/userRelationships";
 
 const state = reactive<{
-    user?: ExtendedUser,
-    friends?: (User & { friendshipState: FriendshipStatus })[]
-    groups?: Group[],
-    events?: Event[],
-}>({})
+    user?: ExtendedUser;
+    friends?: (User & { friendshipState: FriendshipStatus })[];
+    groups?: Group[];
+    events?: Event[];
+}>({});
 
+const useGlobal = () => state;
+export default useGlobal;
 
-const useGlobal = () => state
-export default useGlobal
-
-export const isLoggedIn = () => !!state.user
+export const isLoggedIn = () => !!state.user;

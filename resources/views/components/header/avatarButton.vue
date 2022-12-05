@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {UserCircleIcon} from '@heroicons/vue/24/outline'
-import {Link} from '@inertiajs/inertia-vue3'
+import { UserCircleIcon } from "@heroicons/vue/24/outline";
+import { Link } from "@inertiajs/inertia-vue3";
 
-import useGlobal from '@/scripts/composables/useGlobal'
-import CommonPopover from '@/views/components/common/headless/commonPopover.vue'
+import useGlobal from "@/scripts/composables/useGlobal";
+import CommonPopover from "@/views/components/common/headless/commonPopover.vue";
 
-const user = useGlobal().user
+const user = useGlobal().user;
 </script>
 
 <template>
@@ -36,7 +36,7 @@ const user = useGlobal().user
                 </menu>
             </template>
             <template #button>
-                <UserCircleIcon class="w-8 h-8"/>
+                <UserCircleIcon class="w-8 h-8" />
             </template>
         </CommonPopover>
     </template>

@@ -1,29 +1,28 @@
 <script setup lang="ts">
-import {XMarkIcon} from '@heroicons/vue/24/outline'
 import {
     Dialog,
     DialogPanel,
     TransitionChild,
     TransitionRoot,
-} from '@headlessui/vue'
-import {useVModel} from '@vueuse/core'
-
+} from "@headlessui/vue";
+import { XMarkIcon } from "@heroicons/vue/24/outline";
+import { useVModel } from "@vueuse/core";
 
 const props = defineProps<{
-    open: boolean
-}>()
+    open: boolean;
+}>();
 
-const isOpen = useVModel(props, 'open')
+const isOpen = useVModel(props, "open");
 
 const close = () => {
-    if (!isOpen.value) return
-    isOpen.value = false
-}
+    if (!isOpen.value) return;
+    isOpen.value = false;
+};
 </script>
 
 <template>
     <TransitionRoot :show="isOpen" as="template">
-        <Dialog static as="div" @close="close" class="fixed inset-0">
+        <Dialog static as="div" class="fixed inset-0" @close="close">
             <TransitionChild
                 appear
                 as="template"
@@ -36,8 +35,8 @@ const close = () => {
                     as="div"
                     class="fixed bg-white w-[min(25rem,100%)] top-20 bottom-12 right-0 shadow-xl rounded-l-xl md:border-l-2 border-y flex flex-col transition-transform ease-in-out duration-200 overflow-y-scroll scrollbar-hide z-10"
                 >
-                    <button @click="close" class="absolute right-1 top-1">
-                        <XMarkIcon class="w-8 h-8 text-gray-700"/>
+                    <button class="absolute right-1 top-1" @click="close">
+                        <XMarkIcon class="w-8 h-8 text-gray-700" />
                     </button>
                     <slot />
                 </DialogPanel>
@@ -45,7 +44,6 @@ const close = () => {
         </Dialog>
     </TransitionRoot>
 </template>
-
 
 <style>
 .scrollbar-hide::-webkit-scrollbar {
