@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import AddNavButton from "@/views/components/layout/addNavButton.vue";
 import AvatarButton from "@/views/components/layout/avatarButton.vue";
+import PlusButton from "@/views/components/layout/plusButton.vue";
 import TabNavHeader from "@/views/components/layout/tabNavHeader.vue";
+import UploadButton from "@/views/components/layout/uploadButton.vue";
 import GlobalProvider from "@/views/layouts/globalProvider.vue";
+
+import DownloadButton from "../components/layout/downloadButton.vue";
 </script>
 
 <template>
@@ -10,9 +14,11 @@ import GlobalProvider from "@/views/layouts/globalProvider.vue";
         <div>
             <nav class="flex flex-row justify-between">
                 <TabNavHeader />
-                <div>
+                <div class="flex space-x-4 px-8 py-2">
+                    <DownloadButton />
+                    <UploadButton />
+                    <PlusButton />
                     <AddNavButton />
-                    <button>MENU</button>
                     <AvatarButton />
                 </div>
             </nav>
