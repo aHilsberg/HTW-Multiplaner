@@ -14,27 +14,12 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        User::factory()->createMany([
-            [
-                'name' => 'user1',
-                'email' => 'user1@example.com',
-                'password' => 'testtest'
-            ],
-            [
-                'name' => 'user2',
-                'email' => 'user2@example.com',
-                'password' => 'testtest'
-            ],
-            [
-                'name' => 'user3',
-                'email' => 'user3@example.com',
-                'password' => 'testtest'
-            ]
+        $this->call([
+            UserSeeder::class
         ]);
-
-        User::factory(5);
 
         Artisan::call('load:modulux');
         Artisan::call('load:timetable');
+
     }
 }

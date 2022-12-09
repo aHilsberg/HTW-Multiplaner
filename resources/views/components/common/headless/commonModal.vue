@@ -7,10 +7,7 @@ import {
     TransitionChild,
     TransitionRoot,
 } from "@headlessui/vue";
-import { XIcon } from "@heroicons/vue/solid";
 import { useVModel } from "@vueuse/core";
-
-import CommonButton from "@/views/components/common/CommonButton.vue";
 
 const props = defineProps<{
     header: string;

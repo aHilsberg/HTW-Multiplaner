@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {
-    Dialog,
-    DialogPanel,
-    DialogTitle,
-    DialogDescription,
-} from "@headlessui/vue";
-import { nextTick, ref } from "vue";
+import { ref } from "vue";
 
 import { useDeleteProfileForm } from "@/scripts/helpers/backendInteraction";
 import DangerButton from "@/views/components/common/forms/dangerButton.vue";
@@ -13,7 +7,7 @@ import InputError from "@/views/components/common/forms/inputError.vue";
 import InputLabel from "@/views/components/common/forms/inputLabel.vue";
 import SecondaryButton from "@/views/components/common/forms/secondaryButton.vue";
 import TextInput from "@/views/components/common/forms/textInput.vue";
-import CommonModal from "@/views/components/common/headless/CommonModal.vue";
+import CommonModal from "@/views/components/common/headless/commonModal.vue";
 
 const isOpen = ref(false);
 

@@ -4,7 +4,7 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 
 <template>
     <Popover class="relative">
-        <PopoverButton class="w-8 h-3">
+        <PopoverButton class="flex items-center">
             <slot name="button" />
         </PopoverButton>
         <transition

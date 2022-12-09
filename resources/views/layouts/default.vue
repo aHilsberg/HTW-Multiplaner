@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import AddNavButton from "@/views/components/layout/addNavButton.vue";
-import AvatarButton from "@/views/components/layout/avatarButton.vue";
-import PlusButton from "@/views/components/layout/plusButton.vue";
-import TabNavHeader from "@/views/components/layout/tabNavHeader.vue";
-import UploadButton from "@/views/components/layout/uploadButton.vue";
+import AvatarButton from "@/views/components/header/avatarButton.vue";
+import PlusButton from "@/views/components/header/plusButton.vue";
+import TabNavHeader from "@/views/components/header/tabNavHeader.vue";
+import UploadButton from "@/views/components/header/uploadButton.vue";
 import GlobalProvider from "@/views/layouts/globalProvider.vue";
-
-import DownloadButton from "../components/layout/downloadButton.vue";
+import DownloadButton from '@/views/components/header/downloadButton.vue'
+import SidebarButton from '@/views/components/header/sidebar/sidebarButton.vue'
 </script>
 
 <template>
     <GlobalProvider>
         <div>
-            <nav class="flex flex-row justify-between">
+            <nav class="flex items-center justify-between border-b border-gray-200 mt-1">
                 <TabNavHeader />
-                <div class="flex space-x-4 px-8 py-2">
+                <div class="flex px-8 py-2 gap-3 items-center">
                     <DownloadButton />
                     <UploadButton />
                     <PlusButton />
-                    <AddNavButton />
+                    <SidebarButton />
                     <AvatarButton />
                 </div>
             </nav>
