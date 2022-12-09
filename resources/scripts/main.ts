@@ -6,6 +6,7 @@ import {importPageComponent} from '@/scripts/vite/import-page-component'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import weekday from 'dayjs/plugin/weekday'
 import VCalendar from 'v-calendar'
+import 'v-calendar/dist/style.css'
 import { extend as extendDayjs, locale as setDayjsLocale } from 'dayjs'
 import flashPlugin from '@/scripts/plugins/flash.plugin'
 import defaultPlugin from '@/scripts/plugins/default.plugin'
