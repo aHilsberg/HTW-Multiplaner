@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_first_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('user_second_id')->constrained('users')->cascadeOnDelete();
             $table->integer('friendship_state');
-            $table->primary('user_first_id');
+            $table->primary(['user_first_id', 'user_second_id']);
         });
     }
 

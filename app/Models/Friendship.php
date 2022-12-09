@@ -11,6 +11,7 @@ class Friendship extends Pivot {
 
     protected $table = 'friends';
     public $timestamps = false;
+    protected $primaryKey = false;
 
 
     protected $fillable = [
@@ -57,7 +58,7 @@ class Friendship extends Pivot {
 
     public function hasRequested(User $user): bool {
         $first = $this->user_first_id == $user->id;
-        abort_if(!$first && $this->user_second_id != $user, 500, "friendship isn't related to given user");
+        abort_if(!$first && $this->user_second_id != $user->id, 500, "friendship isn't related to given user");
 
         return match ($this->friendship_state) {
             FriendStatus::Befriended => true,
@@ -88,6 +89,6 @@ class Friendship extends Pivot {
         $firstId = min($friendOne->id, $friendTwo->id);
         $secondId = max($friendOne->id, $friendTwo->id);
 
-        return Friendship::where('user_first_id', $firstId)->where('user_second_id', $secondId)->firstOrFail()->delete();
+        return Friendship::where('user_first_id', $firstId)->where('user_second_id', $secondId)->delete();
     }
 }

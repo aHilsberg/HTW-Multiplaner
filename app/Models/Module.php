@@ -31,6 +31,10 @@ class Module extends Model {
         return $this->morphMany(Appointment::class, 'appointable');
     }
 
+    public function appointmentStudyGroups() {
+        return $this->hasManyThrough(AppointmentStudyGroup::class, Appointment::class, 'appointable_id', 'appointment_id');
+    }
+
     public function textContents(): HasMany {
         return $this->hasMany(TextContent::class);
     }

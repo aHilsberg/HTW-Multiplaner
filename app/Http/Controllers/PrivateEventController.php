@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PrivateEvent;
 use Illuminate\Http\Request;
 
-class PrivatePrivateEventController extends Controller
+class PrivateEventController extends Controller
 {
     /**
      * Store a newly created resource in storage.

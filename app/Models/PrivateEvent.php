@@ -24,4 +24,8 @@ class PrivateEvent extends Model
     public function appointments() : MorphMany {
         return $this->morphMany(Appointment::class, 'appointable');
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

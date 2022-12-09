@@ -7,6 +7,7 @@ use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\VotingController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,12 +25,8 @@ use Inertia\Inertia;
 require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('ownTimetable', [
-        ]);
-    })->name('home');
-
-    Route::get('/appointments', [AppointmentController::class, 'index'])->name('lookup');
+    Route::get('/', [AppointmentController::class, 'index'])->name('home');
+    Route::get('/search', [AppointmentController::class, 'search'])->name('lookup');
 });
 
 

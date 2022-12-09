@@ -69,7 +69,25 @@ class User extends Authenticatable {
         return $this->belongsToMany(Appointment::class);
     }
 
+    public function privateEvents() {
+        return $this->hasMany(PrivateEvent::class);
+    }
+
     //-----------------------------------------------------------------------------------------------------
+
+    public static function timetableData(User $user) {
+        return [
+            'private_events' => $user->privateEvents()->with('appointments')->get(),
+            'events' => $user->events()->with('appointments')->get(),
+            'modules' => Module::withWhereHas('appointments.watchers', function ($query) use ($user) {
+                $query->where('id', $user->id);
+            }),
+//            'exams' => Exam::whereHas('appointments.watchers', function ($query) {
+//                $query->where('id', $user->id);
+//            })->withWhereHas('appointments'),
+        ];
+    }
+
 
     public static function getMovableUsers($id): array {
         $validMembers = [];
