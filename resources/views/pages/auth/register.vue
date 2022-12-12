@@ -12,7 +12,6 @@ const { form, submit, validate } = useRegisterForm();
 
 <template layout="auth">
     <form
-"
         @submit.prevent="() => submit({ onFinish: () => {form.reset('password', 'password_confirmation')} })"
         @focusout="() => !form.processing && validate()"
     >
