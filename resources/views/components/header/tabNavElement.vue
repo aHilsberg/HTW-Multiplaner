@@ -19,7 +19,7 @@ defineEmits(["close"]);
     <Link
         :href="href"
         as="ul"
-        class="flex items-center gap-2 -ml-2 pl-4 pr-2 py-1 border-t border-r border-gray-300 rounded-tr-xl"
+        class="flex items-center gap-2 -ml-2 pl-4 pr-2 py-1 border-t border-r border-gray-800 rounded-tr-xl"
     >
         <span class="text-md mr-1">{{ name }}</span>
 

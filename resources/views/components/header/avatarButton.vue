@@ -12,13 +12,15 @@ const user = useGlobal().user;
     <template v-if="!!user">
         <CommonPopover>
             <template #content>
-                <menu class="grid grid-cols-1">
+                <menu
+                    class="w-20 grid grid-cols-1 content-center shadow-lg box-content h-8 w-8 p-4 divide-y"
+                >
                     <li>
                         <Link
                             :href="route('profile')"
                             method="get"
                             as="button"
-                            class="ml-2 underline text-sm text-gray-600"
+                            class="ml-4 text-m text-gray-600"
                         >
                             Profile
                         </Link>
@@ -28,7 +30,7 @@ const user = useGlobal().user;
                             :href="route('logout')"
                             method="post"
                             as="button"
-                            class="underline text-sm text-gray-600"
+                            class="ml-2.5 text-m text-gray-600"
                         >
                             Log Out
                         </Link>
@@ -36,7 +38,9 @@ const user = useGlobal().user;
                 </menu>
             </template>
             <template #button>
-                <UserCircleIcon class="w-8 h-8" />
+                <UserCircleIcon
+                    class="w-8 h-8 hover:scale-110 transition-transform"
+                />
             </template>
         </CommonPopover>
     </template>

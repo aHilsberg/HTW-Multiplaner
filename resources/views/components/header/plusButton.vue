@@ -7,7 +7,9 @@ import CommonPopover from "@/views/components/common/headless/commonPopover.vue"
 <template>
     <CommonPopover>
         <template #content>
-            <menu class="grid grid-cols-1">
+            <menu
+                class="grid grid-cols-1 w-auto content-center shadow-lg border border-inherit divide-y text-m text-gray-600 box-content h-8 w-8 p-4"
+            >
                 <li>
                     <a href="/analytics">Neuer Tab</a>
                 </li>
@@ -17,7 +19,7 @@ import CommonPopover from "@/views/components/common/headless/commonPopover.vue"
             </menu>
         </template>
         <template #button>
-            <PlusIcon class="w-8 h-8" />
+            <PlusIcon class="w-8 h-8 hover:scale-110 transition-transform" />
         </template>
     </CommonPopover>
 </template>

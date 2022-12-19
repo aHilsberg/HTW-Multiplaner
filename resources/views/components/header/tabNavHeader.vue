@@ -43,15 +43,20 @@ const removeTab = (index: number) => {
 
 <template>
     <li class="self-end flex items-center">
-        <TabNavElement href="/" />
+        <TabNavElement href="/" class="bg-yellow-400" />
         <TabNavElement
             v-for="(tab, index) in tabs"
             :key="index"
             :href="tab"
             @close="() => removeTab(index)"
         />
-        <Link as="ul" :href="route('lookup')" :data="{ module: 'B111' }">
-            DEBUG ADD TAB
+        <Link
+            as="ul"
+            :href="route('lookup')"
+            :data="{ module: 'B111' }"
+            class="hover:bg-gray-300 flex items-center gap-2 -ml-2 pl-4 pr-2 py-1 border-t border-r border-gray-300 rounded-tr-xl"
+        >
+            Inaktiver Tab
         </Link>
     </li>
 </template>
