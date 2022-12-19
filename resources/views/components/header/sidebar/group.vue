@@ -24,12 +24,11 @@ const removeGroup = () =>
 <template>
   <SidebarItem class="flex items-center gap-2">
     <div class="bg-gray-200">
-        <span class="text-lg">{{ group.name }}</span>
+      <span class="text-lg">{{ group.name }}</span>
     </div>
 
-      <PencilIcon class="w-6 h-6" @click="renameGroup" />
-      <XMarkIcon class="w-6 h-6 text-red-400" @click="removeGroup" />
-
+    <PencilIcon class="w-6 h-6" @click="renameGroup" />
+    <XMarkIcon class="w-6 h-6 text-red-400" @click="removeGroup" />
 
   </SidebarItem>
 </template>
