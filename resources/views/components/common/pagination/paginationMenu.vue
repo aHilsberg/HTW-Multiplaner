@@ -12,6 +12,7 @@ const props = defineProps<{
 </script>
 
 <template>
+    {{ JSON.stringify(props)}}
     <div class="flex gap-2">
         <PaginationButton :active="!isFirstPage" :current="false" @click="prev">
             <ArrowLeftIcon class="w-4 h-4"/>

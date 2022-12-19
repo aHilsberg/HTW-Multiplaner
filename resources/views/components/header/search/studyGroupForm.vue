@@ -22,6 +22,9 @@ const update = (currentPage: number) => {
                 },
             },
         },
+        onSuccess: () => {
+
+        }
     })
 }
 
@@ -29,7 +32,7 @@ const studyGroup = ref('')
 
 const studyGroupResults = computed(() => useGlobal().query?.studyGroup)
 const {currentPage, isLastPage, isFirstPage, next, prev} = useOffsetPagination({
-    total: studyGroupResults.value?.count ?? 0,
+    total: computed(() => studyGroupResults.value?.count ?? 0),
     page: 1,
     pageSize: PAGE_COUNT,
     onPageChange: ({currentPage}) => update(currentPage),
