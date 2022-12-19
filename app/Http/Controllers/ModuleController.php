@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 class ModuleController extends Controller
 {
     public function search(Request $request){
-        // get search results; json
-
         $search = $request->validate([
             //TODO
         ]);

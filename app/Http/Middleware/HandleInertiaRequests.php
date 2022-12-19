@@ -2,11 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\StudyGroupController;
 use App\Models\Appointment;
 use App\Models\Friendship;
+use App\Models\StudyGroup;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
+use function PHPUnit\Framework\isEmpty;
 
 class HandleInertiaRequests extends Middleware {
     /**
@@ -54,7 +57,19 @@ class HandleInertiaRequests extends Middleware {
                 'timetable' => [
                     'appointments' => $request->user()->appointments()
                 ]
-            ] : [])
+            ] : []),
+            'query' => function () use ($request) {
+                $query = $request->query('query');
+                if (!$query)
+                    return [];
+
+                if (array_key_exists('study_group', $query)) {
+                    return [
+                        'studyGroup' => StudyGroupController::search($request)
+                    ];
+                }
+                return [];
+            }
         ]);
     }
 }
