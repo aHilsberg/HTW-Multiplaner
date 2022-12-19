@@ -15,9 +15,11 @@ const update = (currentPage: number) => {
     queryStudyGroupCall({
         data: {
             query: {
-                study_group: studyGroup.value,
-                page_index: currentPage - 1,
-                page_count: PAGE_COUNT,
+                study_group: {
+                    id: studyGroup.value,
+                    page_index: currentPage - 1,
+                    page_count: PAGE_COUNT,
+                },
             },
         },
     })
@@ -33,12 +35,16 @@ const {currentPage, isLastPage, isFirstPage, next, prev} = useOffsetPagination({
     onPageChange: ({currentPage}) => update(currentPage),
 })
 
-const submit = () => update(currentPage.value)
+const submit = () => {
+    currentPage.value = 0;
+    update(currentPage.value)
+}
 </script>
 
 
 <template>
     <form @submit.prevent="submit">
+        {{ JSON.stringify(studyGroupResults.count) }}
         <InputLabel label="Studiengruppe" for="study-group-id"/>
         <TextInput id="study-group-id" v-model="studyGroup" placeholder="z.B. 21/041/62"/>
 

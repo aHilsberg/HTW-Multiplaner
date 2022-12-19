@@ -9,17 +9,19 @@ use Illuminate\Http\Request;
 class StudyGroupController extends Controller {
     public static function search(Request $request) {
         $search = $request->validate([
-            'query.study_group' => ['required', 'string'],
-            'query.page_index' => ['required', 'integer'],
-            'query.page_count' => ['required', 'integer']
-        ])['query'];
+            'query.study_group.id' => ['required', 'string'],
+            'query.study_group.page_index' => ['required', 'integer'],
+            'query.study_group.page_count' => ['required', 'integer']
+        ])['query']['study_group'];
+
+        $groupsFiltered = StudyGroup::where('id', 'like', $search['id'] . '%')->orderBy('id');
 
         return [
-            'studyGroups' => StudyGroup::where('id', 'like', $search['study_group'] . '%')
+            'studyGroups' => (clone $groupsFiltered)
                 ->skip($search['page_index'] * $search['page_count'])
                 ->take($search['page_count'])
                 ->get(),
-            'count' => StudyGroup::where('id', 'like', $search['study_group'] . '%')->count(),
+            'count' => $groupsFiltered->count(),
         ];
     }
 }

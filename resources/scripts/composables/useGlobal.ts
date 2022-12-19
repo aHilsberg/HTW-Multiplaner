@@ -5,8 +5,9 @@ import {
     FriendshipStatus,
     Group,
     User,
-    Event, StudyGroup,
+    Event,
 } from '@/scripts/types/userRelationships'
+import {Module, StudyGroup} from '@/scripts/types/datatypes'
 
 const state = reactive<{
     user?: ExtendedUser;
@@ -17,8 +18,13 @@ const state = reactive<{
         studyGroup: {
             studyGroups?: StudyGroup[]
             count: number
+        },
+        module: {
+            modules: Module[];
+            count: number;
         }
-    }
+    };
+    faculties?: string[]
 }>
 ({})
 

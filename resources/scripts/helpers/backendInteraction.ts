@@ -123,8 +123,22 @@ export const removeEventCall = wrappedCall<{
 // #region appointments TODO
 
 // search
-export const queryStudyGroupCall = wrappedUpdateCall<{ query: { study_group: string, page_index: number, page_count: number } }>()
-// export const queryModuleCall = wrappedCall<{ name: string, level: string, lecturer: string }>('query.module', Method.POST)
+export const queryStudyGroupCall = wrappedUpdateCall<{
+    query: {
+        study_group: {
+            id: string,
+            page_index: number, page_count: number
+        }
+    }
+}>()
+export const queryModuleCall = wrappedUpdateCall<{
+    query: {
+        module: {
+            faculty?: string, id?: string, lecturer?: string,
+            page_index: number, page_count: number
+        }
+    }
+}>()
 // export const queryExamCall = wrappedCall<{ }>('query.exam', Method.POST)
 
 // add module page

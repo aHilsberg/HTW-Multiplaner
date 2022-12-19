@@ -23,8 +23,3 @@ export type Event = {
     name: string;
     members: User[];
 };
-
-
-export type StudyGroup = {
-    id: string
-}

@@ -9,9 +9,10 @@ import {
     FriendshipStatus,
     Group,
     User,
-    Event, StudyGroup,
+    Event,
 } from '@/scripts/types/userRelationships'
 import FlashContainer from '@/views/components/flash/container.vue'
+import {Module, StudyGroup} from '@/scripts/types/datatypes'
 
 const page = usePage<{
     auth: {
@@ -21,6 +22,7 @@ const page = usePage<{
         message: string;
     };
     data: {
+        faculties: string[];
         relationships: {
             friends: (User & {
                 friendship: { friendship_state: FriendshipStatus };
@@ -31,8 +33,12 @@ const page = usePage<{
     };
     query: {
         studyGroup: {
-            studyGroups?: StudyGroup[]
-            count: number
+            studyGroups?: StudyGroup[];
+            count: number;
+        };
+        module: {
+            modules: Module[];
+            count: number;
         }
     }
 }>()
@@ -74,13 +80,17 @@ watchEffect(() => {
 watchEffect(() => {
     useGlobal().query = page.props.value.query
 })
+watchEffect(() => {
+    useGlobal().faculties = page.props.value.data.faculties
+})
+
+const data = computed(() => usePage().props.value)
 </script>
 
 <template>
     <FlashContainer/>
+<!--    <div class="px-12 py-6">-->
+<!--        {{ JSON.stringify(data) }}-->
+<!--    </div>-->
     <slot/>
-
-    <div class="px-12 py-6">
-        {{ JSON.stringify(useGlobal()) }}
-    </div>
 </template>
