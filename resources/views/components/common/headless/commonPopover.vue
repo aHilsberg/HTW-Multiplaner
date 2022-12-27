@@ -15,7 +15,7 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
             leave-from-class="translate-y-0 opacity-100"
             leave-to-class="translate-y-1 opacity-0"
         >
-            <PopoverPanel class="absolute w-max right-0">
+            <PopoverPanel class="absolute w-max -right-6 mt-2">
                 <slot name="content" />
             </PopoverPanel>
         </transition>

@@ -2,11 +2,16 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\StudyGroupController;
 use App\Models\Appointment;
 use App\Models\Friendship;
+use App\Models\Module;
+use App\Models\StudyGroup;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
+use function PHPUnit\Framework\isEmpty;
 
 class HandleInertiaRequests extends Middleware {
     /**
@@ -46,6 +51,7 @@ class HandleInertiaRequests extends Middleware {
                 'message' => $request->session()->get('message')
             ],
             'data' => ($request->user() ? [
+                'faculties' => Module::groupBy('faculty')->pluck('faculty')->all(),
                 'relationships' => [
                     'friends' => Friendship::allFriends($request->user()),
                     'groups' => $request->user()->groups()->with('members:id,name')->get(),
@@ -54,7 +60,24 @@ class HandleInertiaRequests extends Middleware {
                 'timetable' => [
                     'appointments' => $request->user()->appointments()
                 ]
-            ] : [])
+            ] : []),
+            'query' => function () use ($request) {
+                $query = $request->query('query');
+                if (!$query)
+                    return [];
+
+                if (array_key_exists('study_group', $query)) {
+                    return [
+                        'studyGroup' => StudyGroupController::search($request)
+                    ];
+                }
+                if(array_key_exists('module', $query)) {
+                    return  [
+                        'module' => ModuleController::search($request)
+                    ];
+                }
+                return [];
+            }
         ]);
     }
 }

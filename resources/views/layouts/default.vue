@@ -12,7 +12,7 @@ import GlobalProvider from "@/views/layouts/globalProvider.vue";
     <GlobalProvider>
         <div>
             <nav
-                class="flex items-center justify-between border-b border-gray-200 mt-1"
+                class="flex items-center justify-between border-b border-gray-200 mt-1 bg-zinc-100"
             >
                 <TabNavHeader />
                 <div class="flex px-8 py-2 gap-3 items-center">

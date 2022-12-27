@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { TabGroup, TabList } from "@headlessui/vue";
 import { Link, usePage } from "@inertiajs/inertia-vue3";
 
 import TabNavElement from "@/views/components/header/tabNavElement.vue";
@@ -42,16 +43,28 @@ const removeTab = (index: number) => {
 </script>
 
 <template>
-    <li class="self-end flex items-center">
-        <TabNavElement href="/" />
-        <TabNavElement
-            v-for="(tab, index) in tabs"
-            :key="index"
-            :href="tab"
-            @close="() => removeTab(index)"
-        />
-        <Link as="ul" :href="route('lookup')" :data="{ module: 'B111' }">
-            DEBUG ADD TAB
-        </Link>
-    </li>
+    <TabGroup>
+        <TabList class="self-end flex items-center">
+            <TabNavElement
+                href="/"
+                :last-tab="tabs.length === 0"
+                class="bg-yellow-400"
+            />
+            <TabNavElement
+                v-for="(tab, index) in tabs"
+                :key="index"
+                :href="tab"
+                :last-tab="tabs.length === index + 1"
+                @close="() => removeTab(index)"
+            />
+            <Link
+                as="ul"
+                :href="route('lookup')"
+                :data="{ module: 'B111' }"
+                class="hover:bg-gray-300 flex items-center gap-2 -ml-2 pl-4 pr-2 py-1 border-t border-r border-gray-300 rounded-tr-xl"
+            >
+                DEBUG ADD TAB
+            </Link>
+        </TabList>
+    </TabGroup>
 </template>
