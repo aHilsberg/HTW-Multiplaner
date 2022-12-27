@@ -104,19 +104,19 @@ export const useCreateEventForm = () =>
         name: "",
     });
 
-export const renameEventCall = wrappedCall<{ group_id: number; name: string }>(
+export const renameEventCall = wrappedCall<{ event_id: number; name: string }>(
     "event.rename",
     Method.PATCH
 );
 
 export const updateEventCall = wrappedCall<{
-    group_id: number;
+    event_id: number;
     // user ids
     additional_members: number[];
 }>("event.update", Method.PUT);
 
 export const removeEventCall = wrappedCall<{
-    group_id: number;
+    event_id: number;
 }>("event.remove", Method.DELETE);
 // #endregion
 

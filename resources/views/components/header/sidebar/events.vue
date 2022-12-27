@@ -44,11 +44,14 @@ const submit = () => {
         />
       </form>
 
-      <PlusSmallIcon
-        v-show="!showForm"
-        class="w-6 h-6"
-        @click="showForm = true"
-      />
+      <button>
+        <PlusSmallIcon
+          v-show="!showForm"
+          class="w-6 h-6"
+          @click="showForm = true"
+        />
+      </button>
+
     </template>
     <template #content>
       <Event

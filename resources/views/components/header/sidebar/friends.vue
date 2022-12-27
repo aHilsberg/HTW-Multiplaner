@@ -40,11 +40,14 @@ const submit = () => {
                     @input="form.errors.name = undefined"
                 />
             </form>
-            <PlusSmallIcon
-                v-show="!showForm"
-                class="w-6 h-6"
-                @click="showForm = true"
-            />
+            <button>
+                <PlusSmallIcon
+                    v-show="!showForm"
+                    class="w-6 h-6"
+                    @click="showForm = true"
+                />
+            </button>
+
         </template>
         <template #content>
             <Friend
