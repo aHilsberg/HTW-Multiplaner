@@ -8,7 +8,7 @@
     </button>
 
     <div>
-      <FullCalendar :options="options" />
+<!--      <FullCalendar :options="options" />-->
     </div>
 
 </template>

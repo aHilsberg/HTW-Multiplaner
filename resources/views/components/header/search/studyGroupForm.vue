@@ -24,7 +24,7 @@ const update = (currentPage: number) => {
         },
         onSuccess: () => {
 
-        }
+        },
     })
 }
 
@@ -39,7 +39,7 @@ const {currentPage, isLastPage, isFirstPage, next, prev} = useOffsetPagination({
 })
 
 const submit = () => {
-    currentPage.value = 0;
+    currentPage.value = 0
     update(currentPage.value)
 }
 </script>
@@ -47,7 +47,6 @@ const submit = () => {
 
 <template>
     <form @submit.prevent="submit">
-        {{ JSON.stringify(studyGroupResults.count) }}
         <InputLabel label="Studiengruppe" for="study-group-id"/>
         <TextInput id="study-group-id" v-model="studyGroup" placeholder="z.B. 21/041/62"/>
 
@@ -63,7 +62,7 @@ const submit = () => {
                 <ChevronRightIcon class="w-6 h-6 text-gray-700"/>
             </Link>
         </li>
-        <PaginationMenu :current-page="currentPage" :is-first-page="isFirstPage" :is-last-page="isLastPage" :next="next"
-                        :prev="prev"/>
     </ul>
+    <PaginationMenu :current-page="currentPage" :is-first-page="isFirstPage" :is-last-page="isLastPage" :next="next"
+                    :prev="prev" class="mt-2"/>
 </template>

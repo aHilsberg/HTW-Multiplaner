@@ -84,7 +84,7 @@ watchEffect(() => {
     useGlobal().faculties = page.props.value.data.faculties
 })
 
-const data = computed(() => usePage().props.value)
+const data = computed(() => usePage().props.value.data)
 </script>
 
 <template>

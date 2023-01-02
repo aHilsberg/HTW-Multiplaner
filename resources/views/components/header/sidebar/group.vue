@@ -32,7 +32,7 @@ const removeGroup = () =>
     </template>
 
     <template v-if="showForm">
-      <TextInput v-model="props.group.name" @keyup.enter="renameGroup; showForm = false" />
+      <TextInput v-model="props.group.name" @keyup.enter="renameGroup(); showForm = false" />
     </template>
 
     <button>

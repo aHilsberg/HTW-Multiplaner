@@ -32,7 +32,7 @@ const removeEvent = () =>
     </template>
 
     <template v-if="showForm">
-      <TextInput v-model="props.event.name" @keyup.enter="renameEvent; showForm = false" />
+      <TextInput v-model="props.event.name" @keyup.enter="renameEvent(); showForm = false" />
     </template>
 
     <button>
