@@ -18,7 +18,14 @@ const { form, submit, validate } = useResetPasswordForm(
 
 <template layout="auth">
     <form
-        @submit.prevent="() => submit({onFinish: () => {form.reset('password', 'password_confirmation')}})"
+        @submit.prevent="
+            () =>
+                submit({
+                    onFinish: () => {
+                        form.reset('password', 'password_confirmation');
+                    },
+                })
+        "
         @focusout="() => !form.processing && validate()"
     >
         <div>

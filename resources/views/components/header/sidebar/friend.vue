@@ -44,7 +44,10 @@ const acceptFriend = () =>
 
         <template v-if="friend.friendshipState === FriendshipStatus.Invited">
             <button>
-                <CheckIcon class="w-6 h-6 text-green-400" @click="acceptFriend" />
+                <CheckIcon
+                    class="w-6 h-6 text-green-400"
+                    @click="acceptFriend"
+                />
             </button>
             <button>
                 <XMarkIcon class="w-6 h-6 text-red-400" @click="removeFriend" />
@@ -52,7 +55,10 @@ const acceptFriend = () =>
         </template>
         <template v-else>
             <button>
-                <MinusIcon class="w-6 h-6 text-gray-700" @click="removeFriend" />
+                <MinusIcon
+                    class="w-6 h-6 text-gray-700"
+                    @click="removeFriend"
+                />
             </button>
         </template>
     </SidebarItem>

@@ -7,8 +7,8 @@ import {
     TransitionChild,
     TransitionRoot,
 } from "@headlessui/vue";
-import { useVModel } from "@vueuse/core";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
+import { useVModel } from "@vueuse/core";
 
 const props = defineProps<{
     header: string;
@@ -31,13 +31,20 @@ const isOpen = useVModel(props, "open", emit);
                 as="div"
                 class="fixed inset-0 flex items-center justify-center"
             >
-                <DialogPanel as="div" class="w-full max-w-sm rounded bg-white px-6 py-4 relative">
-                    <button class="absolute right-5" @click="() => emit('close')">
+                <DialogPanel
+                    as="div"
+                    class="w-full max-w-sm rounded bg-white px-6 py-4 relative"
+                >
+                    <button
+                        class="absolute right-5"
+                        @click="() => emit('close')"
+                    >
                         <XMarkIcon class="w-8 h-8 text-gray-700" />
                     </button>
 
-
-                    <DialogTitle v-if="!!header" class="text-2xl">{{ header }}</DialogTitle>
+                    <DialogTitle v-if="!!header" class="text-2xl">{{
+                        header
+                    }}</DialogTitle>
                     <DialogDescription v-if="!!description">{{
                         description
                     }}</DialogDescription>

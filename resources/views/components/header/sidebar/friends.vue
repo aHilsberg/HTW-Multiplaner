@@ -17,11 +17,11 @@ const { form, validate, submit: submitFriendship } = useRequestFriendshipForm();
 const submit = () => {
     submitFriendship({
         onSuccess: () => {
-            console.log("SUCC")
+            console.log("SUCC");
             showForm.value = false;
         },
         onError: (err) => {
-            console.log(err)
+            console.log(err);
             createErrorMessage(err);
         },
     });
@@ -49,7 +49,6 @@ const submit = () => {
                     @click="showForm = true"
                 />
             </button>
-
         </template>
         <template #content>
             <Friend

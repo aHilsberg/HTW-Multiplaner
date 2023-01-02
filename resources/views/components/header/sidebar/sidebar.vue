@@ -2,9 +2,9 @@
 import { useVModel } from "@vueuse/core";
 
 import CommonSidebarModal from "@/views/components/common/headless/commonSidebarModal.vue";
+import Events from "@/views/components/header/sidebar/events.vue";
 import Friends from "@/views/components/header/sidebar/friends.vue";
 import Groups from "@/views/components/header/sidebar/groups.vue";
-import Events from "@/views/components/header/sidebar/events.vue";
 
 const props = defineProps<{
     open: boolean;

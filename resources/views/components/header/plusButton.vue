@@ -2,11 +2,9 @@
 import { PlusIcon } from "@heroicons/vue/24/outline";
 
 import CommonPopover from "@/views/components/common/headless/commonPopover.vue";
-import SearchModal from '@/views/components/header/search/searchModal.vue'
+import SearchModal from "@/views/components/header/search/searchModal.vue";
 
-
-const openSearchModal = ref(false)
-
+const openSearchModal = ref(false);
 </script>
 
 <template>
