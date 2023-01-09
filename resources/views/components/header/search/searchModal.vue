@@ -3,6 +3,7 @@ import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 import { useVModel } from "@vueuse/core";
 
 import CommonModal from "@/views/components/common/headless/commonModal.vue";
+import ModuluxForm from "@/views/components/header/search/moduluxForm.vue";
 import StudyGroupForm from "@/views/components/header/search/studyGroupForm.vue";
 
 const props = defineProps<{
@@ -42,9 +43,11 @@ const isOpen = useVModel(props, "open", emit);
             </TabList>
             <TabPanels>
                 <TabPanel>
-                    <StudyGroupForm :close="() => isOpen = false" />
+                    <StudyGroupForm :close="() => (isOpen = false)" />
                 </TabPanel>
-                <TabPanel>Content 2</TabPanel>
+                <TabPanel>
+                    <ModuluxForm :close="() => (isOpen = false)" />
+                </TabPanel>
                 <TabPanel>Content 3</TabPanel>
             </TabPanels>
         </TabGroup>

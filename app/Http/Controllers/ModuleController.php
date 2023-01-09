@@ -13,19 +13,21 @@ class ModuleController extends Controller {
             'query.module.lecturer' => ['string'],
             'query.module.page_index' => ['required', 'integer'],
             'query.module.page_count' => ['required', 'integer']
-        ])['query'];
+        ])['query']['module'];;
 
-        $modulesFiltered = Module::orderBy('id');
+        $modulesFiltered = Module::query();
 
+//ddd(json_encode($modulesFiltered->get()));
         if ($search['faculty']) {
             $modulesFiltered = $modulesFiltered->where('faculty', $search['faculty']);
         }
         if ($search['id']) {
             $modulesFiltered = $modulesFiltered->where('id', 'like', '%' . $search['id'] . '%');
+           // ddd($modulesFiltered->get());
         }
         if ($search['lecturer']) {
             $modulesFiltered = $modulesFiltered->whereHas('lecturers', function ($query) use ($search) {
-                $query->where('primary', 'like', '%' . $search . '%');
+                $query->where('primary', 'like', '%' . $search['lecturer']. '%');
             });
         }
 
