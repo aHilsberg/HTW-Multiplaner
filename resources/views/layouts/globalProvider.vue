@@ -84,13 +84,13 @@ watchEffect(() => {
     useGlobal().faculties = page.props.value.data.faculties;
 });
 
-const data = computed(() => usePage().props.value.data);
+const data = computed(() => usePage().props.value);
 </script>
 
 <template>
     <FlashContainer />
-    <!--    <div class="px-12 py-6">-->
-    <!--        {{ JSON.stringify(data) }}-->
-    <!--    </div>-->
+<!--        <div class="px-12 py-6">-->
+<!--            {{ JSON.stringify(data) }}-->
+<!--        </div>-->
     <slot />
 </template>

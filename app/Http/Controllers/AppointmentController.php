@@ -30,13 +30,14 @@ class AppointmentController extends Controller {
         $contents = User::timetableData($user);
 
         if (isset($queryData['module'])) {
-            $contents['module'] = Module::where('id', $queryData['module'])->with(['appointments', 'name']);
+            $contents['module'] = Module::where('id', $queryData['module'])->with(['appointments', 'name'])->get();
         } else if (isset($queryData['event'])) {
-            $contents['event'] = Event::where('id', $queryData['event'])->with(['members', 'appointments']);
-        } else if (isset($query['study_group'])) {
-            $contents['study_group_content'] = Module::withWhereHas('appointments.studyGroups', function ($query) use ($queryData) {
-                $query->where('id', $queryData['study_group']);
-            });
+            $contents['event'] = Event::where('id', $queryData['event'])->with(['members', 'appointments'])->get();
+        } else if (isset($queryData['study_group'])) {
+            $contents['study_group_content'] = StudyGroup::findOrFail($queryData['study_group'])->appointments()->get();
+//            $contents['study_group_content'] = Module::withWhereHas('appointments.studyGroups', function ($query) use ($queryData) {
+//                $query->where('study_group_id', 'like',  );
+//            })->get();
         }
 
         return Inertia::render('searchTimetable', $contents);

@@ -20,6 +20,14 @@ import intercationPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import FullCalendar from "@fullcalendar/vue3";
+import {Appointment, Event, Module, PrivateEvent} from '@/scripts/types/datatypes'
+
+const props = defineProps<{
+    private_events: PrivateEvent[],
+    events: Event[] & { appointments: Appointment[] },
+    modules: Module[],
+}>()
+
 
 const options = reactive({
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, intercationPlugin],

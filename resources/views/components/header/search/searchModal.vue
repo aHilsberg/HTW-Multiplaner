@@ -42,7 +42,7 @@ const isOpen = useVModel(props, "open", emit);
             </TabList>
             <TabPanels>
                 <TabPanel>
-                    <StudyGroupForm />
+                    <StudyGroupForm :close="() => isOpen = false" />
                 </TabPanel>
                 <TabPanel>Content 2</TabPanel>
                 <TabPanel>Content 3</TabPanel>
